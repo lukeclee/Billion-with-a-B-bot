@@ -46,6 +46,51 @@ async def drop(ctx):
     response = random.choice(drop_locations)
     await ctx.send("Let's go " + response + "!")
 
+@bot.command(name='drip', help=' - Rates your fit!')
+async def drip(ctx):
+    rate = str(random.randint(0, 11))
+    await ctx.send("I rate your fit " + rate + "/10!")
+
+@bot.command(name='8ball', help=' - Responds with a fortune just like a Magic 8-Ball')
+async def eightBall(ctx):
+    ball_responses = [
+        'It is certain.',
+        'It is decidedly so.',
+        'Without a doubt.',
+        'Yes, definitely.',
+        'You may rely on it',
+        'As I see it, yes.',
+        'Most likely.',
+        'Outlook good.',
+        'Yes.',
+        'Signs point to yes.',
+        'Reply hazy try again',
+        'Ask again later.',
+        'Better not tell you now.',
+        'Cannot predict now.',
+        'Concentrate and ask again.',
+        'Don\'t count on it.',
+        'My reply is no.',
+        'My sources say no.',
+        'Outlook not so good.',
+        'Very doubtful.'
+    ]
+
+    fortune = random.choice(ball_responses)
+    await ctx.send(fortune)
+
+@bot.command(name='roll', help=' - Responds with a value from rolled dice')
+async def roll(ctx, arg1, arg2):
+    diceNum = int(arg1)
+    die = int(arg2[1:])
+    #diceNum = 1
+    #die = 20
+    result = 0
+    for i in range(diceNum):
+        result += random.randint(1, die)
+    
+    await ctx.send("You rolled " + str(diceNum) + " d" + str(die) + " and got " + str(result) + ".")
+
 @bot.event
 async def on_voice_state_update(member, before, current):
     if before.channel is None and current.channel is not None:
