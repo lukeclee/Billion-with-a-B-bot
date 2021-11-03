@@ -1,6 +1,7 @@
 #discord bot
 import os
 import random
+import datetime
 
 from discord.ext import commands
 from discord import DMChannel
@@ -99,6 +100,12 @@ async def on_voice_state_update(member, before, current):
         if luke.id != member.id and luke.voice is None:
             message = member.name + " has joined the " + current.channel.name + " voice channel in " + current.channel.guild.name + " server"
             await DMChannel.send(luke, message)
+
+        if len(current.channel.members) < 2 and datetime.datetime.today().weekday() == 3:
+            listOfTextChannels = guild.text_channels
+            channelToSendMessage = listOfTextChannels[0]
+            roleToMention = guild.get_role(905328272827641856)
+            await channelToSendMessage.send(roleToMention.mention + ", " + member.name + " has joined the " + current.channel.name + " voice channel for Throwdown Thursday and is lonely! :(")
         
 @bot.event
 async def on_command_error(ctx, error):
