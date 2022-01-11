@@ -16,33 +16,54 @@ bot = commands.Bot(command_prefix='!')
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
-@bot.command(name='drop', help=' - Responds with a random drop location in Verdansk')
-async def drop(ctx):
-    drop_locations = [
-        'Summit',
-        'Military Base',
-        'Salt Mine',
-        'Airport',
-        'TV Station',
-        'Bridge Town',
-        'Storage Town',
-        'Superstore',
-        'Stadium',
-        'Lumber',
-        'Boneyard',
-        'Train Station',
-        'Hospital',
-        'Downtown',
-        'Farmland',
-        'Promenade West',
-        'Promenade East',
-        'Hills',
-        'Park',
-        'Port',
-        'Factory',
-        'Prison',
-        'Array'
-    ]
+@bot.command(name='drop', help=' - Responds with a random drop location in Warzone')
+async def drop(ctx, arg1='caldera'):
+    if arg1.lower() == "verdansk":
+        drop_locations = [
+            'Summit',
+            'Military Base',
+            'Salt Mine',
+            'Airport',
+            'TV Station',
+            'Bridge Town',
+            'Storage Town',
+            'Superstore',
+            'Stadium',
+            'Lumber',
+            'Boneyard',
+            'Train Station',
+            'Hospital',
+            'Downtown',
+            'Farmland',
+            'Promenade West',
+            'Promenade East',
+            'Hills',
+            'Park',
+            'Port',
+            'Factory',
+            'Prison',
+            'Array'
+        ]
+    elif arg1.lower() == "caldera":
+        drop_locations = [
+            'Arsenal',
+            'Docks',
+            'Runway',
+            'Ruins',
+            'Mines',
+            'Peak',
+            'Beachhead',
+            'Village',
+            'Lagoon',
+            'Airfield',
+            'Fields',
+            'Sub Pen',
+            'Power Plant',
+            'Capital',
+            'Resort',
+        ]
+    else:
+        await ctx.send("I haven't heard of that map. Please make sure you have spelled the name of the map correctly.")
 
     response = random.choice(drop_locations)
     await ctx.send("Let's go " + response + "!")
